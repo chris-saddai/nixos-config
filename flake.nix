@@ -1,50 +1,61 @@
 {
-  description = "NixOS Flake für PC und Laptop";
+  description = "NixOS Flake: work / freizeit / lsw / laptop";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager/release-25.05";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable"; # oder unstable
+    home-manager = {
+      url = "github:nix-community/home-manager/release-25.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    hydenix.url = "github:richen604/hydenix"; # HyDE via Nix
+    # optional:
+    # nix-gaming.url = "github:fufexan/nix-gaming";
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: {
-    nixosConfigurations = {
-      # Profil für den Haupt-PC
-      #"work" = nixpkgs.lib.nixosSystem {
-      #  system = "x86_64-linux";
-      #  modules = [
-      #    ./profiles/common.nix
-      #    ./profiles/work/profile.nix
-      #    ./hardware/pc.nix
-      #  ];
-      #};
-      
-      #"cas" = nixpkgs.lib.nixosSystem {
-      #  system = "x86_64-linux";
-      #  modules = [
-      #    ./profiles/common.nix
-      #    ./profiles/cas/profile.nix
-      #    ./hardware/pc.nix
-      #  ];
-      #};
-      
-      #"lsw" = nixpkgs.lib.nixosSystem {
-      #  system = "x86_64-linux";
-      #  modules = [
-      #    ./profiles/common.nix
-      #    ./profiles/lsw/profile.nix
-      #    ./hardware/pc.nix
-      #  ];
-      #};
-      
-      # Profil für den Laptop
-      "uni" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+  outputs = { self, nixpkgs, home-manager, hydenix, ... }@inputs:
+  let
+    systems = [ "x86_64-linux" ];
+    forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f system);
+
+    mkSystem = { system, hostname, profile, hwFile }:
+      nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = { inherit inputs; }; # falls du inputs in Modulen brauchst
         modules = [
-          ./profiles/common.nix
-          ./profiles/work/profile.nix
-          ./hardware/laptop.nix
+          ./modules/common/base.nix
+          (./modules/profiles + "/" + profile + ".nix")
+          (./hosts + "/" + profile + ".nix")
+          (./hardware + "/" + hwFile)
+          # Home-Manager systemweit einbinden
+          home-manager.nixosModules.home-manager
         ];
+      };
+  in {
+    nixosConfigurations = {
+      work = mkSystem {
+        system = "x86_64-linux";
+        hostname = "Chris-PC";
+        profile = "work";
+        hwFile = "pc/pc.nix";
+      };
+      freizeit = mkSystem {
+        system = "x86_64-linux";
+        hostname = "Chris-PC";
+        profile = "casual";
+        hwFile = "pc/pc.nix";
+
+      };
+      lsw = mkSystem {
+        system = "x86_64-linux";
+        hostname = "Chris-PC";
+        profile = "lsw";
+        hwFile = "pc/pc.nix";
+      };
+      laptop = mkSystem {
+        system = "x86_64-linux";
+        hostname = "Chris-laptop";
+        profile = "work";
+        hwFile = "laptop/laptop.nix";
       };
     };
   };
