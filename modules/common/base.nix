@@ -28,10 +28,10 @@
   #};
 
   # PipeWire Standard-Audio
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    pulse.enable = true;
-  };
+  #services.pipewire = {
+  #  enable = true;
+  #  alsa.enable = true;
+  #  pulse.enable = true;
+  #};
 }
 
