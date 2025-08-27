@@ -27,32 +27,32 @@
         specialArgs = { inherit inputs; }; # falls du inputs in Modulen brauchst
         modules = [
           ./modules/common/base.nix
-          (./modules/profiles + "/" + profile + ".nix")
-          (./hardware + "/" + hwFile)
+          ./modules/profiles/${profile}.nix
+          ./hardware/${hwFile}
         ];
       };
   in {
     nixosConfigurations = {
       work = mkSystem {
         system = "x86_64-linux";
-        profile = "/work";
-        hwFile = "/pc/pc.nix";
+        profile = "work";
+        hwFile = "pc/pc.nix";
       };
       freizeit = mkSystem {
         system = "x86_64-linux";
-        profile = "/casual";
-        hwFile = "/pc/pc.nix";
+        profile = "casual";
+        hwFile = "pc/pc.nix";
 
       };
       lsw = mkSystem {
         system = "x86_64-linux";
-        profile = "/lsw";
-        hwFile = "/pc/pc.nix";
+        profile = "lsw";
+        hwFile = "pc/pc.nix";
       };
       laptop = mkSystem {
         system = "x86_64-linux";
-        profile = "/work";
-        hwFile = "/laptop/laptop.nix";
+        profile = "work";
+        hwFile = "laptop/laptop.nix";
       };
     };
   };
