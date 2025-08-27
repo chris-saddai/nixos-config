@@ -5,6 +5,6 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    users.chris = import ./work-home.nix; # optional eigene HM-Datei
+    users.chris = import ./home/work-home.nix; # optional eigene HM-Datei
   };
 }
