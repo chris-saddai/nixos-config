@@ -7,7 +7,7 @@
    inputs.hydenix.inputs.nixos-hardware.nixosModules.common-cpu-amd
    inputs.hydenix.inputs.nixos-hardware.nixosModules.common-pc-laptop
   ];
-
+  boot.initrd.kernelModules = [ "amdgpu" ];
   #AMD
   #services.tlp.enable = false;
   services.power-profiles-daemon.enable = true;

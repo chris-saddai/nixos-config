@@ -2,7 +2,7 @@
   description = "NixOS Flake: work / freizeit / lsw / laptop";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable"; # oder unstable
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05"; # oder unstable
     hydenix.url = "github:richen604/hydenix"; # HyDE via Nix
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
