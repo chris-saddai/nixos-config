@@ -1,8 +1,13 @@
-{config, pkgs, ... }:
+{config, pkgs, inputs, ... }:
 
-{
-    home-manager.users."chris" = { pkgs, ...}: {  
-  hydenix.hm = {
+{ 
+   home-manager = {
+     useGlobalPkgs = true;
+     useUserPackages = true;
+     extraSpecialArgs = {inherit inputs;};
+     
+     users."chris" = { ... }: {
+     hydenix.hm = {
       enable = true;
 
       editors = {
@@ -31,5 +36,6 @@
       spotify.enable = false;
       #theme.enable = false;
     };
+   };
 };
 }

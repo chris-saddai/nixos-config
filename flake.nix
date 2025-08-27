@@ -23,16 +23,12 @@
         specialArgs = { inherit inputs; }; # falls du inputs in Modulen brauchst
         modules = [
           ./modules/common/base.nix
-	  ./modules/hm/${profile}.nix
+	  ./home/${profile}-home.nix
           (./modules/profiles + "/" + profile + ".nix")
           (./hosts + "/" + profile + ".nix")
           (./hardware + "/" + hwFile)
           # Home-Manager systemweit einbinden
-          home-manager.nixosModules.home-manager{
-	    home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-	    home-manager.users.chris = import ./home/work-home.nix;
-          }
+          home-manager.nixosModules.home-manager
         ];
       };
   in {

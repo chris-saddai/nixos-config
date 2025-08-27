@@ -1,7 +1,10 @@
 { config, pkgs, lib, inputs, ... }:
 
 {
-  imports = [inputs.hydenix.nixosModules.default];
+  imports = [
+    inputs.hydenix.lib.nixOsModules
+    inputs.hydenix.inputs.home-manager.nixosModules.home-manager
+  ];
 
   hydenix = {
     enable = true;
