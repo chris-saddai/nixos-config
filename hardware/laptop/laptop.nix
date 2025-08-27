@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 {
-  import = [ ./hardware_configuration.nix];
+  imports = [ ./hardware-configuration.nix];
 
   #AMD
   services.tlp.enable = true;

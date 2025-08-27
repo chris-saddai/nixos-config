@@ -1,8 +1,8 @@
 {config, pkgs, ... }:
 
 {
-
-    hydenix.hm = {
+    home-manager.users."chris" = { pkgs, ...}: {  
+  hydenix.hm = {
       enable = true;
 
       editors = {
@@ -31,4 +31,5 @@
       spotify.enable = false;
       #theme.enable = false;
     };
+};
 }
