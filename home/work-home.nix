@@ -38,34 +38,13 @@
       };
 
       spotify.enable = false;
+
       theme = {
         enable = true;
 	active = "Green Lush";
         themes = [ "Green Lush" "Catppuccin Mocha" ];
       };
-      
-      shell = {
-        enable = true; # enable shell module
-        zsh = {
-          enable = true; # enable zsh shell
-          plugins = [ "sudo" ]; # zsh plugins
-          configText = ""; # zsh config text
-        };
-        bash.enable = false; # enable bash shell
-        fish.enable = false; # enable fish shell
-        pokego.enable = false; # enable Pokemon ASCII art scripts
-        p10k.enable = false; # enable p10k prompt
-        starship.enable = true; # enable starship prompt
-      };
-
-      terminals = {
-        enable = true; # enable terminals module
-        kitty = {
-          enable = true; # enable kitty terminal
-          configText = ""; # kitty config text
-        };
-      };
-
+      fastfetch.enable = true;
 
     };
 }
