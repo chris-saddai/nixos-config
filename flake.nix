@@ -21,14 +21,13 @@
     systems = [ "x86_64-linux" ];
     forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f system);
 
-    mkSystem = { system, hostname, profile, hwFile }:
+    mkSystem = { system, profile, hwFile }:
       nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = { inherit inputs; }; # falls du inputs in Modulen brauchst
         modules = [
           ./modules/common/base.nix
           (./modules/profiles + "/" + profile + ".nix")
-          (./hosts + "/" + profile + ".nix")
           (./hardware + "/" + hwFile)
         ];
       };
@@ -36,26 +35,22 @@
     nixosConfigurations = {
       work = mkSystem {
         system = "x86_64-linux";
-        hostname = "Chris-PC";
         profile = "/work";
         hwFile = "/pc/pc.nix";
       };
       freizeit = mkSystem {
         system = "x86_64-linux";
-        hostname = "Chris-PC";
         profile = "/casual";
         hwFile = "/pc/pc.nix";
 
       };
       lsw = mkSystem {
         system = "x86_64-linux";
-        hostname = "Chris-PC";
         profile = "/lsw";
         hwFile = "/pc/pc.nix";
       };
       laptop = mkSystem {
         system = "x86_64-linux";
-        hostname = "Chris-laptop";
         profile = "/work";
         hwFile = "/laptop/laptop.nix";
       };
