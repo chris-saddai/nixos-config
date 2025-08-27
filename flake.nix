@@ -8,6 +8,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hydenix.url = "github:richen604/hydenix"; # HyDE via Nix
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs"; 
+    };
     # optional:
     # nix-gaming.url = "github:fufexan/nix-gaming";
   };
@@ -23,12 +27,9 @@
         specialArgs = { inherit inputs; }; # falls du inputs in Modulen brauchst
         modules = [
           ./modules/common/base.nix
-	  ./home/${profile}-home.nix
           (./modules/profiles + "/" + profile + ".nix")
           (./hosts + "/" + profile + ".nix")
           (./hardware + "/" + hwFile)
-          # Home-Manager systemweit einbinden
-          home-manager.nixosModules.home-manager
         ];
       };
   in {

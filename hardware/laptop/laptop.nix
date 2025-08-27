@@ -4,7 +4,7 @@
   imports = [ ./hardware-configuration.nix];
 
   #AMD
-  services.tlp.enable = true;
+  services.tlp.enable = false;
   services.power-profiles-daemon.enable = true;
 
   #Nvidia

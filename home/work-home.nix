@@ -1,28 +1,20 @@
 {config, pkgs, inputs, ... }:
 
 { 
-   home-manager = {
-     useGlobalPkgs = true;
-     useUserPackages = true;
-     extraSpecialArgs = {inherit inputs;};
-     
-     users."chris" = { ... }: {
-     hydenix.hm = {
+    hydenix.hm = {
       enable = true;
 
       editors = {
         enable = true; # enable editors module
-        neovim.enable = false; # enable neovim module
+        neovim = false; # enable neovim module
         vscode = {
           enable = false; # enable vscode module
           wallbash = true; # enable wallbash extension for vscode
         };
-        vim.enable = true; # enable vim module
         #default = "neovim"; # default text editor
       };      
 
       firefox.enable = false;
-      gaming.enable = false;
 
       hyprland.enable = false;
       
@@ -36,6 +28,4 @@
       spotify.enable = false;
       #theme.enable = false;
     };
-   };
-};
 }
