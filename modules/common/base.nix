@@ -1,5 +1,21 @@
 { config, pkgs, lib, inputs, ... }:
-{
+
+let
+  lunarvim-with-config = pkgs.lunarvim.override {
+    globalConfig = ''
+      vim.g.mapleader = " "
+vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+vim.keymap.set("i", "<C-c>", "<Esc>")
+vim.keymap.set("n", "<leader><leader>", function ()
+  vim.cmd("w")
+end)
+
+--lvim.builtin.lir.active = false
+lvim.builtin.bufferline.active= false
+    '';
+    nvimAlias = true;
+  };
+in {
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     substituters = [ "https://cache.nixos.org" ];
@@ -14,7 +30,7 @@
     isNormalUser = true;
     initialPassword = "2712";
     extraGroups = [ "wheel" "networkmanager" "video" "audio" "libvirtd" ];
-    packages = with pkgs; [ git lunarvim];
+    packages = with pkgs; [ git lunarvim-with-config];
   };
   security.sudo.wheelNeedsPassword = false; # optional
 

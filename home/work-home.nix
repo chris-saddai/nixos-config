@@ -1,9 +1,23 @@
 {config, pkgs, ... }:
 
-{ 
+{
+    home.packages = with pkgs; [
+	brave
+    ];
+
     hydenix.hm = {
       enable = true;
 
+      hyprland = {
+        enable = true;
+	extraConfig = ''
+	  input {
+	    kb_layout = de
+	    kb_variant = 
+	    kb_options = caps:super
+	  }
+	'';
+      };
       editors = {
         enable = true; # enable editors module
         neovim = false; # enable neovim module
@@ -14,10 +28,7 @@
         #default = "neovim"; # default text editor
       };      
 
-      firefox.enable = false;
-
-      hyprland.enable = false;
-      
+      firefox.enable = false;      
       social = {
         enable = true; # enable social module
         discord.enable = false; # enable discord module
@@ -26,6 +37,12 @@
       };
 
       spotify.enable = false;
-      #theme.enable = false;
+      theme = {
+        enable = true;
+	active = "Green Lush";
+        themes = [ "Green Lush" "Catppuccin Mocha" ];
+      };
+
+
     };
 }

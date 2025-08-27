@@ -10,6 +10,15 @@ let
      userPkgs = import inputs.nixpkgs {
       config.allowUnfree = true;
      };
+     
+     ghostunnel = prev.ghostunnel // {
+       services = {};
+     };
+        
+     php = prev.php // {
+       services = {};
+     };
+
     })
    ];
   };  
