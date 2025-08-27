@@ -22,7 +22,7 @@
           wallbash = true; # enable wallbash extension for vscode
         };
         vim.enable = true; # enable vim module
-        default = "lvim"; # default text editor
+        #default = "neovim"; # default text editor
       };      
 
       firefox.enable = false;

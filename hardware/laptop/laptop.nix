@@ -1,6 +1,8 @@
 { config, pkgs, lib, ... }:
 
 {
+  import = [ ./hardware_configuration.nix];
+
   #AMD
   services.tlp.enable = true;
   services.power-profiles-daemon.enable = true;
@@ -10,7 +12,5 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
-  }
-
-  imports = [ ./hardware-configuration.nix ];
+  };
 }

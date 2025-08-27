@@ -35,27 +35,27 @@
       work = mkSystem {
         system = "x86_64-linux";
         hostname = "Chris-PC";
-        profile = "work";
-        hwFile = "pc/pc.nix";
+        profile = "/work";
+        hwFile = "/pc/pc.nix";
       };
       freizeit = mkSystem {
         system = "x86_64-linux";
         hostname = "Chris-PC";
-        profile = "casual";
-        hwFile = "pc/pc.nix";
+        profile = "/casual";
+        hwFile = "/pc/pc.nix";
 
       };
       lsw = mkSystem {
         system = "x86_64-linux";
         hostname = "Chris-PC";
-        profile = "lsw";
-        hwFile = "pc/pc.nix";
+        profile = "/lsw";
+        hwFile = "/pc/pc.nix";
       };
       laptop = mkSystem {
         system = "x86_64-linux";
         hostname = "Chris-laptop";
-        profile = "work";
-        hwFile = "laptop/laptop.nix";
+        profile = "/work";
+        hwFile = "/laptop/laptop.nix";
       };
     };
   };

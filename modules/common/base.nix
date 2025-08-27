@@ -12,12 +12,13 @@
 
   users.users.chris = {
     isNormalUser = true;
+    initialPassword = "2712";
     extraGroups = [ "wheel" "networkmanager" "video" "audio" "libvirtd" ];
-    packages = with pkgs; [ git ];
+    packages = with pkgs; [ git lunarvim];
   };
   security.sudo.wheelNeedsPassword = false; # optional
 
-  services.openssh.enable = false; # optional
+  # services.openssh.enable = false; # optional hydenix conflict
   networking.networkmanager.enable = true;
 
   # Grafik-Stack (modernes Schema, ersetzt legacy hardware.opengl)
