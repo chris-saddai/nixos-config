@@ -6,6 +6,7 @@
    inputs.hydenix.inputs.nixos-hardware.nixosModules.common-gpu-amd
    inputs.hydenix.inputs.nixos-hardware.nixosModules.common-cpu-amd
    inputs.hydenix.inputs.nixos-hardware.nixosModules.common-pc-laptop
+   inputs.hydenix.inputs.nixos-hardware.nixosModules.common-hidpi
   ];
   boot.initrd.kernelModules = [ "amdgpu" ];
   #AMD
