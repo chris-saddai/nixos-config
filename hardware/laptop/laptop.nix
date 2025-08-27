@@ -1,14 +1,19 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, inputs, lib, ... }:
 
 {
-  imports = [ ./hardware-configuration.nix];
+  imports = [ 
+   ./hardware-configuration.nix
+   inputs.hydenix.inputs.nixos-hardware.nixosModules.common-gpu-amd
+   inputs.hydenix.inputs.nixos-hardware.nixosModules.common-cpu-amd
+   inputs.hydenix.inputs.nixos-hardware.nixosModules.common-pc-laptop
+  ];
 
   #AMD
-  services.tlp.enable = false;
-  services.power-profiles-daemon.enable = true;
+  #services.tlp.enable = false;
+  #services.power-profiles-daemon.enable = true;
 
   #Nvidia
-  services.xserver.videoDrivers = [ "amdgpu" ];
+  #services.xserver.videoDrivers = [ "amdgpu" ];
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
