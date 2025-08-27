@@ -10,10 +10,10 @@
 
   #AMD
   #services.tlp.enable = false;
-  #services.power-profiles-daemon.enable = true;
+  services.power-profiles-daemon.enable = true;
 
-  #Nvidia
-  #services.xserver.videoDrivers = [ "amdgpu" ];
+  #AMD GPU
+  services.xserver.videoDrivers = [ "amdgpu" ];
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
