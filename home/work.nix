@@ -14,7 +14,7 @@
 input {
 	kb_layout = de
 	kb_variant = 
-	kb_options = caps:super
+	kb_options = altwin:swap_alt_win
   touchpad {
     natural_scroll = true
   }	

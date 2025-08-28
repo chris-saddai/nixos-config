@@ -37,7 +37,7 @@
         # -------------------------
         # Desktop Profiles
         # -------------------------
-        desktop-work = inputs.hydenix.inputs.hydenix-nixpkgs.lib.nixosSystem {
+        work = inputs.hydenix.inputs.hydenix-nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs; };
           modules = [
@@ -46,7 +46,7 @@
           ];
         };
 
-        desktop-casual = nixpkgs.lib.nixosSystem {
+        casual = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
             ./common.nix
@@ -54,7 +54,7 @@
           ];
         };
 
-        desktop-lsw = nixpkgs.lib.nixosSystem {
+        lsw = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
             ./common.nix
