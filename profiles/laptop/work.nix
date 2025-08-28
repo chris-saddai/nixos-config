@@ -45,7 +45,7 @@ in
     enable = true;
     hostname = "Chris-Laptop";   # anpassen
     timezone = "Europe/Berlin";
-    locale = "de_DE.UTF-8";
+    locale = "en_US.UTF-8";
   };
 
   system.stateVersion = "25.05";
