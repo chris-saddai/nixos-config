@@ -1,4 +1,4 @@
-{ config, pkgs, lib, inputs, ... }:
+{ pkgs, ... }:
 
 let
   lunarvim-with-config = pkgs.lunarvim.override {
@@ -31,7 +31,7 @@ in {
     isNormalUser = true;
     initialPassword = "2712";
     extraGroups = [ "wheel" "networkmanager" "video" "audio" "libvirtd" ];
-    packages = with pkgs; [ git lunarvim-with-config];
+    packages = with pkgs; [ lunarvim-with-config];
     shell = pkgs.zsh;
   };
 
