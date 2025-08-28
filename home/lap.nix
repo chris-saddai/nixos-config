@@ -15,7 +15,7 @@ input {
 	kb_layout = de
 	kb_variant = 
 	kb_options = caps:super
-  touchpad = {
+  touchpad {
     natural_scroll = true
   }	
 }
