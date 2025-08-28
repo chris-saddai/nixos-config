@@ -2,9 +2,14 @@
 
 {
   home.packages = with pkgs; [
-    git
     webcord
     brave
   ];
-   
+  
+  programs.git = {
+    enable = true;
+    userName = "Chris";
+    userEmail = "christian@saddai";
+  };
+
 }
