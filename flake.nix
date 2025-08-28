@@ -1,71 +1,67 @@
 {
-  description = "NixOS Flake: work / freizeit / lsw / laptop";
+  description = "NixOS configs with multiple profiles (work, casual, lsw)";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05"; # oder unstable
-    hydenix.url = "github:richen604/hydenix"; # HyDE via Nix
-    home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };    
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    # Hydenix (für Work-Profile)
+    hydenix.url = "github:richen604/hydenix";
+
+    # nix-index-database
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs"; 
+      inputs.nixpkgs.follows = "nixpkgs";
     };
-    # optional:
-    # nix-gaming.url = "github:fufexan/nix-gaming";
+
+    # Nixos-Hardware (praktisch für Laptop/PC Hardware)
+    #nixos-hardware.url = "github:NixOS/nixos-hardware";
   };
 
-  outputs = { self, nixpkgs, home-manager, hydenix, ... }@inputs:
-  let
-    systems = [ "x86_64-linux" ];
-    forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f system);
+  outputs = { self, nixpkgs, hydenix, nix-index-database, nixos-hardware, ... }@inputs:
+    let
+      system = "x86_64-linux";
+    in {
+      nixosConfigurations = {
+        # -------------------------
+        # Laptop Profiles
+        # -------------------------
+        laptop = inputs.hydenix.inputs.hydenix-nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./common.nix
+            ./profiles/laptop/work.nix
+          ];
+        };
 
-    mkSystem = { system, profile, hwFile }:
-      nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = { inherit inputs; }; # falls du inputs in Modulen brauchst
-        modules = [
-          ./modules/common/base.nix
-          ./modules/profiles/${profile}.nix
-          ./hardware/${hwFile}
-        ];
-      };
- 
-     mkHydenixSystem = { system, profile, hwFile }:
-      inputs.hydenix.inputs.hydenix-nixpkgs.lib.nixosSystem {
-        inherit (inputs.hydenix.lib) system;
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./modules/common/base.nix
-          ./modules/profiles/${profile}.nix
-          ./hardware/${hwFile}
-        ];
-      };
+        # -------------------------
+        # Desktop Profiles
+        # -------------------------
+        desktop-work = inputs.hydenix.inputs.hydenix-nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./common.nix
+            ./profiles/pc/work.nix
+          ];
+        };
 
-  in {
-    nixosConfigurations = {
-      work = mkHydenixSystem {
-        system = "x86_64-linux";
-        profile = "work";
-        hwFile = "pc/pc.nix";
-      };
-      freizeit = mkSystem {
-        system = "x86_64-linux";
-        profile = "casual";
-        hwFile = "pc/pc.nix";
+        desktop-casual = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            ./common.nix
+            ./profiles/pc/casual.nix
+          ];
+        };
 
-      };
-      lsw = mkSystem {
-        system = "x86_64-linux";
-        profile = "lsw";
-        hwFile = "pc/pc.nix";
-      };
-      laptop = mkHydenixSystem {
-        system = "x86_64-linux";
-        profile = "work";
-        hwFile = "laptop/laptop.nix";
+        desktop-lsw = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            ./common.nix
+            ./profiles/pc/lsw.nix
+          ];
+        };
       };
     };
-  };
 }
+

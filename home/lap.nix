@@ -2,7 +2,7 @@
 
 {
     home.packages = with pkgs; [
-	brave
+	    brave
     ];
 
     hydenix.hm = {
@@ -10,13 +10,15 @@
 
       hyprland = {
         enable = true;
-	extraConfig = ''
-	  input {
-	    kb_layout = de
-	    kb_variant = 
-	    kb_options = caps:super
-            natural_scroll = true;
-	  }
+	      extraConfig = ''
+input {
+	kb_layout = de
+	kb_variant = 
+	kb_options = caps:super
+  touchscreen = {
+    natural_scroll = true
+  }	
+}
 	'';
       };
       editors = {
@@ -41,10 +43,8 @@
 
       theme = {
         enable = true;
-	active = "Green Lush";
+	      active = "Green Lush";
         themes = [ "Green Lush" "Catppuccin Mocha" ];
       };
-      fastfetch.enable = true;
-
     };
 }
