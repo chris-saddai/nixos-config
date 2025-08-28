@@ -22,8 +22,10 @@ in {
   };
 
   time.timeZone = "Europe/Berlin";
-  i18n.defaultLocale = "en_US.UTF-8";
   console.keyMap = "de";
+
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
   users.users.chris = {
     isNormalUser = true;
