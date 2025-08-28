@@ -43,7 +43,7 @@ input {
     social = {
       enable = true; # enable social module
       discord.enable = false; # enable discord module
-      webcord.enable = false; # enable webcord module
+      webcord.enable = true; # enable webcord module
       vesktop.enable = true; # enable vesktop module
     };
 
