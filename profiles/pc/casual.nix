@@ -12,7 +12,6 @@ in
     ./hardware-configuration.nix
 
     inputs.home-manager.nixosModules.home-manager
-    inputs.nixos-hardware.nixosModules.common-pc-desktop
     inputs.nixos-hardware.nixosModules.common-cpu-intel
     #inputs.nixos-hardware.nixosModules.common-gpu-nvidia
   ];

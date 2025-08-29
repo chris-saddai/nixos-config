@@ -22,7 +22,6 @@ in
     inputs.hydenix.inputs.home-manager.nixosModules.home-manager
     inputs.hydenix.lib.nixOsModules
 
-    inputs.nixos-hardware.nixosModules.common-pc-desktop
     inputs.nixos-hardware.nixosModules.common-cpu-intel
     #inputs.nixos-hardware.nixosModules.common-gpu-nvidia
   ];
