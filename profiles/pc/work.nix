@@ -55,6 +55,18 @@ in
     locale = "en_US.UTF-8";
   };
 
+  services.keyd.enable = true;
+
+  environment.etc."keyd/default.conf".text = ''
+    [ids]
+    *
+
+    [main]
+    leftalt = leftmeta
+    leftmeta = leftalt
+  '';
+
+
   system.stateVersion = "25.05";
 }
 

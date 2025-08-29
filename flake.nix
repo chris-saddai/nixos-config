@@ -14,7 +14,12 @@
     };
 
     # Nixos-Hardware (praktisch für Laptop/PC Hardware)
-    #nixos-hardware.url = "github:NixOS/nixos-hardware";
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
+    
+    home-manager = {
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, hydenix, nix-index-database, nixos-hardware, ... }@inputs:
@@ -48,6 +53,7 @@
 
         casual = nixpkgs.lib.nixosSystem {
           inherit system;
+          specialArgs = { inherit inputs; };
           modules = [
             ./common.nix
             ./profiles/pc/casual.nix

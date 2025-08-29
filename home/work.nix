@@ -14,14 +14,17 @@
 input {
 	kb_layout = de
 	kb_variant = 
-	kb_options = altwin:swap_alt_win
+	kb_options =
   touchpad {
     natural_scroll = true
   }	
 }
 monitor = DP-4, 1920x1080, 0x0, 1
+workspace = 1, monitor:DP-4
 monitor = DP-3, 1920x1080, 1920x0, 1
+workspace = 2, monitor:DP-3
 monitor = HDMI-A-5, 1920x1080, 3840x0, 1
+workspace = 3, monitor: HDMI-A-5
 
 env = LIBVA_DRIVER_NAME,nvidia
 env = XDG_SESSION_TYPE,wayland
@@ -33,6 +36,7 @@ cursor {
 }
 
 '';
+
     };
     
     editors = {
