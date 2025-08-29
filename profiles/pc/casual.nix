@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ config, inputs, ... }:
 let
   pkgs = import inputs.nixpkgs {
     system = "x86_64-linux";
@@ -14,7 +14,7 @@ in
     inputs.home-manager.nixosModules.home-manager
     inputs.nixos-hardware.nixosModules.common-pc-desktop
     inputs.nixos-hardware.nixosModules.common-cpu-intel
-    inputs.nixos-hardware.nixosModules.common-gpu-nvidia
+    #inputs.nixos-hardware.nixosModules.common-gpu-nvidia
   ];
  
   # Desktop Environment

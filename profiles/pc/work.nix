@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ config, inputs, ... }:
 let
   pkgs = import inputs.hydenix.inputs.hydenix-nixpkgs {
     inherit (inputs.hydenix.lib) system;
@@ -24,8 +24,16 @@ in
 
     inputs.nixos-hardware.nixosModules.common-pc-desktop
     inputs.nixos-hardware.nixosModules.common-cpu-intel
-    inputs.nixos-hardware.nixosModules.common-gpu-nvidia
+    #inputs.nixos-hardware.nixosModules.common-gpu-nvidia
   ];
+
+  hardware.nvidia = {
+   modesetting.enable = true;
+   powerManagement.enable = true;
+   open = true;
+   nvidiaSettings = true;
+   package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };  
 
   home-manager = {
     useGlobalPkgs = true;

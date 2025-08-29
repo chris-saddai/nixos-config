@@ -19,6 +19,19 @@ input {
     natural_scroll = true
   }	
 }
+monitor = DP-4, 1920x1080, 0x0, 1
+monitor = DP-3, 1920x1080, 1920x0, 1
+monitor = HDMI-A-5, 1920x1080, 3840x0, 1
+
+env = LIBVA_DRIVER_NAME,nvidia
+env = XDG_SESSION_TYPE,wayland
+env = GBM_BACKEND,nvidia-drm
+env = __GLX_VENDOR_LIBRARY_NAME,nvidia
+
+cursor {
+	no_hardware_cursors = true
+}
+
 '';
     };
     
