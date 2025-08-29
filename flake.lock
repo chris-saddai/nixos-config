@@ -21,6 +21,27 @@
     "home-manager": {
       "inputs": {
         "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1756496801,
+        "narHash": "sha256-IYIsnPy+cJxe8RbDHBrCtfJY0ry2bG2H7WvMcewiGS8=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "77a71380c38fb2a440b4b5881bbc839f6230e1cb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "ref": "master",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "home-manager_2": {
+      "inputs": {
+        "nixpkgs": [
           "hydenix",
           "hydenix-nixpkgs"
         ]
@@ -122,7 +143,7 @@
     },
     "hydenix": {
       "inputs": {
-        "home-manager": "home-manager",
+        "home-manager": "home-manager_2",
         "hyde": "hyde",
         "hyde-config": "hyde-config",
         "hyde-ipc": "hyde-ipc",
@@ -290,6 +311,7 @@
     },
     "root": {
       "inputs": {
+        "home-manager": "home-manager",
         "hydenix": "hydenix",
         "nix-index-database": "nix-index-database_2",
         "nixos-hardware": "nixos-hardware_2",
