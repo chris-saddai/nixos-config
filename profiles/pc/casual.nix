@@ -113,6 +113,7 @@ in
     useGlobalPkgs = true;
     useUserPackages = true;
     extraSpecialArgs = { inherit inputs; };
+    backupFileExtension = "backup";
     users."chris" = { ... }: {
       imports = [
         ./../../home/casual.nix

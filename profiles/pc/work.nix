@@ -38,6 +38,7 @@ in
     useGlobalPkgs = true;
     useUserPackages = true;
     extraSpecialArgs = { inherit inputs; };
+    backupFileExtension = "backup";
     users."chris" = { ... }: {
       imports = [
         inputs.hydenix.lib.homeModules
