@@ -44,5 +44,11 @@ in {
     enable = true;
     enable32Bit = true; # 32-bit für Steam/Wine
   };
+
+  # Pre-Service Skript, das alte Backups entfernt
+  systemd.tmpfiles.rules = [
+    "R! /home/chris/.config/*.backup"
+    "R! /home/chris/.local/share/applications/*.backup"
+  ];
 }
 

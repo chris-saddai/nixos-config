@@ -2,6 +2,7 @@
 
 {
   home.packages = with pkgs; [
+    steam
     brave
   ];
        
@@ -24,7 +25,7 @@ workspace = 1, monitor:DP-4
 monitor = DP-3, 1920x1080, 1920x0, 1
 workspace = 2, monitor:DP-3
 monitor = HDMI-A-5, 1920x1080, 3840x0, 1
-workspace = 3, monitor: HDMI-A-5
+workspace = 3, monitor:HDMI-A-5
 
 env = LIBVA_DRIVER_NAME,nvidia
 env = XDG_SESSION_TYPE,wayland
@@ -58,7 +59,7 @@ cursor {
     firefox.enable = false;      
     social = {
       enable = true; # enable social module
-      discord.enable = false; # enable discord module
+      discord.enable = true; # enable discord module
       webcord.enable = true; # enable webcord module
       vesktop.enable = true; # enable vesktop module
     };
