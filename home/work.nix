@@ -4,6 +4,7 @@
   home.packages = with pkgs; [
     steam
     brave
+    plover.dev
   ];
        
   hydenix.hm = {

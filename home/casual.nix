@@ -4,6 +4,7 @@
   home.packages = with pkgs; [
     vesktop
     brave
+    plover.dev
   ];
 
   programs.git = {

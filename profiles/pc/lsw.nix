@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, lib, ... }:
 
 let
   gpuIDs = [
@@ -7,35 +7,28 @@ let
   ];
 in
 {
-  options.vfio.enable = with lib;
-    mkEnableOption "Configure the machine for VFIO";
-  
-  config = let cfg = config.vfio;
-  in {
-    boot = {
-      initrd.kernelModules = [
-        "vfio_pci"
-        "vfio"
-        "vfio_iommu_type1"
-        "vfio_virqfd"
+  imports = [
+    ./hardware-configuration.nix
+  ];
 
-        "nvidia"
-        "nvidia_modeset"
-        "nvidia_uvm"
-        "nvidia_drm"
-      ];
+  boot = {
+    initrd.kernelModules = [
+      "vfio_pci"
+      "vfio"
+      "vfio_iommu_type1"
+      "i915"
+    ];
 
-      kernelParams = [
-        "intel_iommu=on"
-      ] ++ lib.optional cfg.enable
-        # isolate the GPU
-        ("vfio-pci.ids="+ lib.concatStringsSep "," gpuIDs);
-    };
+    kernelParams = [
+      "intel_iommu=on"
+      "iommu=pt"
+      # isolate the GPU
+      ("vfio-pci.ids="+ lib.concatStringsSep "," gpuIDs)
+    ];
+  };
 
     hardware.opengl.enable = true;
     virtualisation.spiceUSBRedirection.enable = true;
-
-  };
 
   virtualisation.libvirtd = {
     enable = true;
@@ -44,7 +37,8 @@ in
   };
   programs.virt-manager.enable = true;
   programs.zsh.enable = true;
+  
+  services.xserver.videoDrivers = [ "modesetting" ];
 
   system.stateVersion = "25.05";
 }
-
