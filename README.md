@@ -1,3 +1,3 @@
 # Nixos
 
-Mein Nixos configs
+Meine Nixos configs
