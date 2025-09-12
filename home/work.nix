@@ -1,11 +1,50 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 
 {
+
+  imports = [
+    inputs.plover-flake.homeManagerModules.plover
+  ];
+
   home.packages = with pkgs; [
     steam
     brave
-    plover.dev
-  ];
+    cura-appimage
+    discord-canary
+    (writeShellScriptBin "kicad" ''
+    export __GLX_VENDOR_LIBRARY_NAME=""
+    exec ${kicad-small}/bin/kicad "$@"
+    '')
+    (writeShellScriptBin "arduino-ide" ''
+      exec ${arduino-ide}/bin/arduino-ide --ozone-platform=x11
+    '')
+  ]; 
+
+  xdg.desktopEntries = {
+    "arduino-ide" = {
+      name = "Arduino IDE";
+      comment = "The official IDE for Arduino";
+      exec = "arduino-ide";
+      terminal = false;
+      categories = [ "Development" "IDE" ];
+      icon = "arduino-ide"; # Stelle sicher, dass dieses Icon existiert
+    };
+  };
+
+  programs.plover = {
+    enable = true;
+
+    package = inputs.plover-flake.packages.${pkgs.system}.plover.withPlugins (
+      ps : with ps; [
+        plover-current-time
+        plover-fancytext
+        plover-palantype-DE
+        plover-regenpfeifer
+        plover-ninja
+        plover_system_switcher
+      ]
+    );
+  };
        
   hydenix.hm = {
     enable = true;
@@ -15,7 +54,7 @@
       extraConfig = ''
 input {
 	kb_layout = de
-	kb_variant = 
+	kb_variant =
 	kb_options =
   touchpad {
     natural_scroll = true
@@ -60,9 +99,9 @@ cursor {
     firefox.enable = false;      
     social = {
       enable = true; # enable social module
-      discord.enable = true; # enable discord module
-      webcord.enable = true; # enable webcord module
-      vesktop.enable = true; # enable vesktop module
+      discord.enable = false; # enable discord module
+      webcord.enable = false; # enable webcord module
+      vesktop.enable = false; # enable vesktop module
     };
 
     spotify.enable = false;

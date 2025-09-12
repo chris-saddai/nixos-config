@@ -1,4 +1,4 @@
-{ config, inputs, ... }:
+{ lib, config, inputs, ... }:
 let
   pkgs = import inputs.hydenix.inputs.hydenix-nixpkgs {
     inherit (inputs.hydenix.lib) system;
@@ -23,16 +23,36 @@ in
     inputs.hydenix.lib.nixOsModules
 
     inputs.nixos-hardware.nixosModules.common-cpu-intel
-    #inputs.nixos-hardware.nixosModules.common-gpu-nvidia
+    inputs.nixos-hardware.nixosModules.common-gpu-nvidia
   ];
 
+  boot = {
+    initrd.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "i915" "nvidia_drm" ];
+    kernelParams = [ "nvidia-drm.fbdev=1" ];
+  };
+
+  hardware.graphics.enable = true;
+
   hardware.nvidia = {
-   modesetting.enable = true;
-   powerManagement.enable = true;
-   open = true;
-   nvidiaSettings = true;
-   package = config.boot.kernelPackages.nvidiaPackages.stable;
+    modesetting.enable = true;
+    powerManagement.enable = false;
+    open = true;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    prime = {
+      offload.enable = false;
+      sync.enable = true;
+
+      intelBusId = "PCI:00:02:0";
+      nvidiaBusId = "PCI:01:00:0";
+    };
   };  
+
+  services.xserver.videoDrivers = [ "nvidia" ];
+
+  environment.systemPackages = with pkgs; [
+    vulkan-headers
+  ];
 
   home-manager = {
     useGlobalPkgs = true;
@@ -57,7 +77,7 @@ in
   };
 
   services.keyd.enable = true;
-
+  
   environment.etc."keyd/default.conf".text = ''
     [ids]
     *
