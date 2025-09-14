@@ -54,9 +54,9 @@
       enable = true;
       extraConfig = ''
 input {
-	kb_layout =canary,us,us
-	kb_variant =basic,workman,colemak_dh_ortho
-	kb_options =
+	kb_layout =canary,us,us,us
+  kb_variant =basic,workman,colemak_dh_ortho,
+  kb_options =
   touchpad {
     natural_scroll = true
   }	
