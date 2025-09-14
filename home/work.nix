@@ -11,6 +11,7 @@
     brave
     cura-appimage
     discord-canary
+    tidal-hifi
     (writeShellScriptBin "kicad" ''
     export __GLX_VENDOR_LIBRARY_NAME=""
     exec ${kicad-small}/bin/kicad "$@"
@@ -53,8 +54,8 @@
       enable = true;
       extraConfig = ''
 input {
-	kb_layout = de
-	kb_variant =
+	kb_layout =canary,us,us
+	kb_variant =basic,workman,colemak_dh_ortho
 	kb_options =
   touchpad {
     natural_scroll = true
@@ -104,12 +105,12 @@ cursor {
       vesktop.enable = false; # enable vesktop module
     };
 
-    spotify.enable = false;
+    spotify.enable = true;
 
     theme = {
       enable = true;
 	    active = "Green Lush";
-      themes = [ "Green Lush" "Catppuccin Mocha" ];
+      themes = [ "Green Lush" "Catppuccin Mocha" "Material Sakura" "Scarlet-Night"];
     };
   };
 }

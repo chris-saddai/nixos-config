@@ -22,6 +22,14 @@ let
         { mode = "n"; key = "<leader>pv"; action = "<cmd>Ex<CR>"; }
         { mode = "i"; key = "<C-c>"; action = "<Esc>"; }
         { mode = "n"; key = "<leader><leader>"; action = ":w<CR>"; }
+        { mode = "n"; key = "<leader>y"; action = "\"+y"; }
+        { mode = "v"; key = "<leader>y"; action = "\"+y"; }
+        { mode = "n"; key = "<leader>t"; action = "<cmd>ToggleTerm<CR>"; }
+        { mode = "n"; key = "<leader>e"; action = "<cmd>lua vim.diagnostic.open_float()<CR>"; }
+        { mode = "n"; key = "[d"; action = "<cmd>lua vim.diagnostic.goto_prev()<CR>"; }
+        { mode = "n"; key = "]d"; action = "<cmd>lua vim.diagnostic.goto_next()<CR>"; }
+        { mode = "n"; key = "<leader>ca"; action = "<cmd>lua vim.lsp.buf.code_action()<CR>"; }
+
       ];
 
       plugins.bufferline.enable = false;
@@ -56,6 +64,12 @@ let
             { name = "buffer"; }
             { name = "path"; }
           ];
+          settings.mapping = {
+            "<C-Space>" = "cmp.mapping.complete()";
+            "<CR>" = "cmp.mapping.confirm({ select = true })";
+            "<Tab>" = "cmp.mapping.select_next_item()";
+            "<S-Tab>" = "cmp.mapping.select_prev_item()";
+          };
         };
 
         plugins.lsp-format.enable = true;

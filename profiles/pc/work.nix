@@ -85,9 +85,32 @@ in
     [main]
     leftalt = leftmeta
     leftmeta = leftalt
-  '';
+
+    rightalt = layer(umlaut)
+
+    [umlaut]
+    a = macro(C-S-u 00e4 space)
+    o = macro(C-S-u 00f6 space)
+    u = macro(C-S-u 00fc space)
+    s = macro(C-S-u 00df space)
+
+    [umlaut+shift]
+    a = macro(C-S-u 00c4 space)
+    o = macro(C-S-u 00d6 space)
+    u = macro(C-S-u 00dc space)
+    s = macro(C-S-u 1e9e space) # ẞ '';
+  
+  services.xserver.extraLayouts.canary = {
+    description = "Canary layout";
+    languages = [ "eng" ];
+    symbolsFile = ./canary; # Pfad zu deiner canary-Datei im Repo
+  };
+
+  #environment.etc."X11/xkb/symbols/canary".text = builtins.readFile ./canary;
+
 
 
   system.stateVersion = "25.05";
 }
+
 
