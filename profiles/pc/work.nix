@@ -35,7 +35,7 @@ in
 
   hardware.nvidia = {
     modesetting.enable = true;
-    powerManagement.enable = false;
+    powerManagement.enable = true;
     open = true;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
@@ -49,6 +49,18 @@ in
   };  
 
   services.xserver.videoDrivers = [ "nvidia" ];
+
+  powerManagement.resumeCommands = ''
+    sleep 4
+
+    pkill hyprlock
+
+    hyprlock &
+
+    # Alternativ, wenn du Hyprland benutzt:
+    # Versuche den Lock-Befehl über Hyprland's IPC zu senden (häufig besser in Wayland-Setups)
+    #hyprctl dispatch exec hyprlock
+  '';
 
   environment.systemPackages = with pkgs; [
     vulkan-headers
@@ -100,7 +112,7 @@ in
     u = macro(C-S-u 00dc space)
     s = macro(C-S-u 1e9e space) # ẞ '';
   
-  services.xserver.extraLayouts.canary = {
+  services.xserver.xkb.extraLayouts.canary = {
     description = "Canary layout";
     languages = [ "eng" ];
     symbolsFile = ./canary; # Pfad zu deiner canary-Datei im Repo

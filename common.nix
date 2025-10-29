@@ -122,6 +122,7 @@ in {
   security.sudo.wheelNeedsPassword = false;
 
   networking.networkmanager.enable = true;
+  networking.networkmanager.wifi.backend = "iwd";
 
   #Grafik-Stack 
   hardware.graphics = {

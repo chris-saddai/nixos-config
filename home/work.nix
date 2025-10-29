@@ -5,16 +5,20 @@
   imports = [
     inputs.plover-flake.homeManagerModules.plover
   ];
-
+  
   home.packages = with pkgs; [
     steam
     brave
+    musescore
     cura-appimage
     discord-canary
+    ollama-cuda
+    oterm
+    wlinhibit
     tidal-hifi
     (writeShellScriptBin "kicad" ''
     export __GLX_VENDOR_LIBRARY_NAME=""
-    exec ${kicad-small}/bin/kicad "$@"
+    exec ${kicad}/bin/kicad "$@"
     '')
     (writeShellScriptBin "arduino-ide" ''
       exec ${arduino-ide}/bin/arduino-ide --ozone-platform=x11
@@ -29,6 +33,15 @@
       terminal = false;
       categories = [ "Development" "IDE" ];
       icon = "arduino-ide"; # Stelle sicher, dass dieses Icon existiert
+    };
+
+    "kicad" = {
+      name = "Kicad";
+      comment = "";
+      exec = "kicad";
+      terminal = false;
+      categories = [ "Development" ];
+      icon = "kicad"; # Stelle sicher, dass dieses Icon existiert
     };
   };
 
@@ -54,8 +67,8 @@
       enable = true;
       extraConfig = ''
 input {
-	kb_layout =canary,us,us,us
-  kb_variant =basic,workman,colemak_dh_ortho,
+	kb_layout =us,canary,us,us
+  kb_variant =,basic,workman,colemak_dh_ortho
   kb_options =
   touchpad {
     natural_scroll = true
@@ -77,6 +90,7 @@ cursor {
 	no_hardware_cursors = true
 }
 
+windowrule = opaque forcergbx, class:^(kicad)$
 '';
 
     };
@@ -110,7 +124,7 @@ cursor {
     theme = {
       enable = true;
 	    active = "Green Lush";
-      themes = [ "Green Lush" "Catppuccin Mocha" "Material Sakura" "Scarlet-Night"];
+      themes = [ "Green Lush" "Catppuccin Mocha" "Material Sakura" "Scarlet Night"];
     };
   };
 }
